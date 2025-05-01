@@ -9,23 +9,36 @@
 ![Equipment Availability Screenshot](equipment_booking/images/booking.png)
 
 
-Installation
+### Setup
+# Clone repository
+git clone https://github.com/your-repo/equipment-booking-system.git
+cd equipment-booking-system
 
-Clone the repo
-Setup requirements
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate    # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Database setup
 python manage.py makemigrations
 python manage.py migrate
+
+# Create admin user
 python manage.py createsuperuser
-python manage.py runserver
 
-go to admin
-create user either make group of the permissions add the user to that 
+# Set permissions (run once)
+python manage.py shell
+>>> from bookings.admin import setup_all_permissions
+>>> setup_all_permissions()
+>>> exit()
+
 or 
-run setup_all_permsission from bookings.admin once to add the permissions for the role 
-STAFF_REQUIRED SHOULD BE ACTIVE FOR ALL USERS TO LOGIN
+Set user with group and give permission yourself 
 
-Then you can login as specific users
-
+STAFF_STATUS SHOULD BE ACTIVE
 
 ### Core Functionality
 
