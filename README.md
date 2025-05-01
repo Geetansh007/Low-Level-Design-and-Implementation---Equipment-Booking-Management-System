@@ -1,5 +1,13 @@
 ## Features
 
+### Equipment Availability View
+
+![Equipment Availability Screenshot](equipment_booking/images/avability.png)
+
+### Equipment Booking View
+
+![Equipment Availability Screenshot](equipment_booking/images/booking.png)
+
 ### Core Functionality
 
 - **User Management**
@@ -76,14 +84,6 @@
 | ----------------------------- | ------ | ------------------ |
 | /api/notifications/           | GET    | User notifications |
 | /api/notifications/mark-read/ | POST   | Mark as read       |
-
-### Equipment Availability View
-
-![Equipment Availability Screenshot](equipment_booking/images/avability.png)
-
-### Equipment Booking View
-
-![Equipment Availability Screenshot](equipment_booking/images/booking.png)
 
 ## Setup Instructions
 
