@@ -39,10 +39,9 @@ def check_booking_conflicts(sender, instance, **kwargs):
     if instance.status in ['CANCELLED', 'COMPLETED']:
         return
         
-    if instance.pk:  # Only for existing bookings
+    if instance.pk:  
         original = Booking.objects.get(pk=instance.pk)
         
-        # Check if relevant fields changed
         relevant_fields_changed = (
             original.equipment != instance.equipment or
             original.start_time != instance.start_time or

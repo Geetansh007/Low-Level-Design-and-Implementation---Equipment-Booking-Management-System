@@ -16,6 +16,9 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = UserAdmin.add_fieldsets + (
         ('Additional Info', {'fields': ('role', 'department', 'phone')}),
     )
+    def get_role_display(self, obj):
+        return obj.get_role_display()
+    get_role_display.short_description = 'Role'
 
 class EquipmentAdmin(admin.ModelAdmin):
     list_display = ('name', 'type', 'location', 'quantity', 'is_active', 'availability_actions')
@@ -98,8 +101,30 @@ class BookingAdmin(admin.ModelAdmin):
     list_display = ('employee', 'equipment', 'start_time', 'end_time', 'status')
     list_filter = ('status', 'equipment__type', 'start_time')
     search_fields = ('employee__username', 'equipment__name')
-    raw_id_fields = ('employee', 'manager', 'equipment')
+    
 
+    raw_id_fields = ()  
+    
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+
+        if db_field.name == "employee":
+            kwargs["queryset"] = User.objects.filter(role='EMPLOYEE').order_by('username')
+            return db_field.formfield(**kwargs)
+
+        elif db_field.name == "manager":
+            kwargs["queryset"] = User.objects.filter(role='MANAGER').order_by('username')
+            return db_field.formfield(**kwargs)
+            
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+   
+    def employee(self, obj):
+        return str(obj.employee)
+    employee.admin_order_field = 'employee__username'
+    
+    def equipment(self, obj):
+        return str(obj.equipment)
+    equipment.admin_order_field = 'equipment__name'
+    
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(EquipmentType)
 admin.site.register(Equipment, EquipmentAdmin)
