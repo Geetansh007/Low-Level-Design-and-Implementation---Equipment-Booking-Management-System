@@ -15,7 +15,6 @@ router.register(r'reports', ReportViewSet, basename='report')
 
 urlpatterns = [
     path('', include(router.urls)),
-    # Additional custom endpoints
     path('equipment/<int:pk>/availability/', 
          EquipmentViewSet.as_view({'get': 'availability'}), 
          name='equipment-availability'),
