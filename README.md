@@ -8,6 +8,25 @@
 
 ![Equipment Availability Screenshot](equipment_booking/images/booking.png)
 
+
+Installation
+
+Clone the repo
+Setup requirements
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+
+go to admin
+create user either make group of the permissions add the user to that 
+or 
+run setup_all_permsission from bookings.admin once to add the permissions for the role 
+STAFF_REQUIRED SHOULD BE ACTIVE FOR ALL USERS TO LOGIN
+
+Then you can login as specific users
+
+
 ### Core Functionality
 
 - **User Management**
@@ -90,20 +109,3 @@
 ### Prerequisites
 
 - Python 3.8+
-
-Installation
-
-Clone the repo
-Setup requirements
-python manage.py makemigrations
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver
-
-go to admin
-create user either make group of the permissions add the user to that 
-or 
-run setup_all_permsission from bookings.admin once to add the permissions for the role 
-STAFF_REQUIRED SHOULD BE ACTIVE FOR ALL USERS TO LOGIN
-
-Then you can login as specific users
