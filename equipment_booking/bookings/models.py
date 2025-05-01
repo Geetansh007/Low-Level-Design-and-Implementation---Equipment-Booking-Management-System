@@ -127,7 +127,7 @@ class Booking(DirtyFieldsMixin,models.Model):
         indexes = [
             models.Index(fields=['start_time', 'end_time']),
             models.Index(fields=['status']),
-            models.Index(fields=['recurrence_id']),  # New index for recurring bookings
+            models.Index(fields=['recurrence_id']),  
         ]
         ordering = ['start_time']
     
@@ -144,7 +144,7 @@ class Booking(DirtyFieldsMixin,models.Model):
         if self.recurrence_end and self.recurrence_end < self.start_time:
             raise ValidationError("Recurrence end date must be after the booking start time")
         
-        # For new bookings or when changing time/equipment
+       
         if not self.pk or (self.pk and (
             'start_time' in self.get_dirty_fields() or 
             'end_time' in self.get_dirty_fields() or

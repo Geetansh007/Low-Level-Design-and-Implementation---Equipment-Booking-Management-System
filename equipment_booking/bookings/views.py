@@ -102,7 +102,7 @@ class EquipmentViewSet(viewsets.ModelViewSet):
                 start_time = timezone.make_aware(datetime.combine(current_date, datetime.min.time()))
                 end_time = start_time + timedelta(days=1)
                 
-                # Get all bookings for this day
+                
                 bookings = Booking.objects.filter(
                     equipment=equipment,
                     start_time__lt=end_time,
@@ -206,17 +206,16 @@ class BookingViewSet(viewsets.ModelViewSet):
         elif recurrence == 'WEEKLY':
             delta = timedelta(weeks=1)
         elif recurrence == 'MONTHLY':
-            # For monthly, we'll add 1 month to the date
-            delta = None  # Handle specially
+           
+            delta = None  
         
         while current_time < recurrence_end:
             if recurrence == 'MONTHLY':
-                # Handle month increments (accounting for different month lengths)
+                
                 try:
                     current_time = current_time.replace(month=current_time.month + 1)
                 except ValueError:
-                    # If next month doesn't have enough days (e.g., Jan 31 -> Feb)
-                    # Move to last day of next month
+                   
                     next_month = current_time.month + 1
                     if next_month > 12:
                         next_month = 1
@@ -231,7 +230,7 @@ class BookingViewSet(viewsets.ModelViewSet):
             if current_time >= recurrence_end:
                 break
                 
-            # Create a new booking for this occurrence
+           
             booking_data = {
                 'employee': original_booking.employee.id,
                 'manager': original_booking.manager.id if original_booking.manager else None,
@@ -249,7 +248,7 @@ class BookingViewSet(viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
             else:
-                # Log error but continue with other occurrences
+                
                 print(f"Failed to create recurring booking: {serializer.errors}")
     
     @action(detail=False, methods=['get'])
@@ -278,7 +277,7 @@ class BookingViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        # Get all equipment
+        
         all_equipment = Equipment.objects.filter(is_active=True)
         available_equipment = []
         
@@ -317,7 +316,7 @@ class BookingViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_403_FORBIDDEN
             )
         
-        # Cancel all bookings in this series
+        
         Booking.objects.filter(recurrence_id=booking.recurrence_id).update(status='CANCELLED')
         
         return Response({'status': 'recurring booking series cancelled'})
@@ -345,18 +344,18 @@ class ReportViewSet(viewsets.ViewSet):
     permission_classes = [IsAdmin]
     
     def list(self, request):
-        # Most booked equipment
+        
         most_booked = Equipment.objects.annotate(
             booking_count=Count('booking')
         ).order_by('-booking_count')[:5]
         
-        # Usage stats by equipment type
+       
         usage_stats = EquipmentType.objects.annotate(
             total_bookings=Count('equipment__booking'),
             unique_users=Count('equipment__booking__employee', distinct=True)
         )
         
-        # Current month bookings
+
         current_month_start = timezone.now().replace(day=1, hour=0, minute=0, second=0, microsecond=0)
         next_month_start = (current_month_start + timedelta(days=32)).replace(day=1)
         
@@ -365,7 +364,7 @@ class ReportViewSet(viewsets.ViewSet):
             start_time__lt=next_month_start
         ).count()
         
-        # Recurring bookings stats
+
         recurring_bookings = Booking.objects.filter(recurrence__ne='NONE').count()
         
         data = {

@@ -65,7 +65,6 @@ def check_booking_conflicts(sender, instance, **kwargs):
         
 @receiver(post_delete, sender=Booking)
 def handle_booking_deletion(sender, instance, **kwargs):
-    # Notify when a booking is deleted
     Notification.objects.create(
         user=instance.employee,
         message=f"Your booking for {instance.equipment.name} has been deleted.",
