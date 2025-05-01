@@ -2,7 +2,7 @@
 
 ### Equipment Availability View
 
-![Equipment Availability Screenshot](equipment_booking/images/avability.png)
+![Equipment Availability Screenshot](equipment_booking/images/ava.png)
 
 ### Equipment Booking View
 
