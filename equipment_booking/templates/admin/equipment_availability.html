@@ -1,0 +1,73 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+.availability-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.availability-table th, .availability-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.availability-table th {
+    background-color: #f2f2f2;
+}
+.availability-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.available {
+    color: green;
+    font-weight: bold;
+}
+.unavailable {
+    color: red;
+    font-weight: bold;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1>{{ title }}</h1>
+    
+    <div class="module">
+        <h2>{{ equipment.name }} ({{ equipment.type }})</h2>
+        <p>Location: {{ equipment.location }}</p>
+        <p>Total quantity: {{ equipment.quantity }}</p>
+        
+        <h3>Availability for {% if period == 'day' %}Today{% elif period == 'week' %}This Week{% else %}This Month{% endif %}</h3>
+        
+        <table class="availability-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Booked</th>
+                    <th>Available</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for day in availability_data %}
+                <tr>
+                    <td>{{ day.date|date:"D, M j, Y" }}</td>
+                    <td>{{ day.bookings }}</td>
+                    <td>{{ day.available }}</td>
+                    <td>
+                        {% if day.available > 0 %}
+                            <span class="available">Available</span>
+                        {% else %}
+                            <span class="unavailable">Fully Booked</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
