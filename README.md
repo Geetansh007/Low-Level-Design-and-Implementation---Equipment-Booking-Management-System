@@ -1,14 +1,3 @@
-## Features
-
-### Equipment Availability View
-
-![Equipment Availability Screenshot](equipment_booking/images/avl.png)
-
-### Equipment Booking View
-
-![Equipment Availability Screenshot](equipment_booking/images/booking.png)
-
-
 ### Setup
 # Clone repository
 git clone https://github.com/your-repo/equipment-booking-system.git
@@ -31,14 +20,25 @@ python manage.py createsuperuser
 
 # Set permissions (run once)
 python manage.py shell
->>> from bookings.admin import setup_all_permissions
->>> setup_all_permissions()
->>> exit()
+from bookings.admin import setup_all_permissions
+setup_all_permissions()
 
 or 
 Set user with group and give permission yourself 
 
 STAFF_STATUS SHOULD BE ACTIVE
+
+## Features
+
+### Equipment Availability View
+
+![Equipment Availability Screenshot](equipment_booking/images/avl.png)
+
+### Equipment Booking View
+
+![Equipment Availability Screenshot](equipment_booking/images/booking.png)
+
+
 
 ### Core Functionality
 
