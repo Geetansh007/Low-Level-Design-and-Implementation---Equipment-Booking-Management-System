@@ -1,4 +1,3 @@
-# bookings/admin.py
 from django.contrib import admin
 from .models import User, EquipmentType, Equipment, Booking, Notification
 from django.contrib.auth.admin import UserAdmin
