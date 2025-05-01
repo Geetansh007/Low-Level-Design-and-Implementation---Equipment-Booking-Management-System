@@ -101,4 +101,9 @@ python manage.py createsuperuser
 python manage.py runserver
 
 go to admin
-add user -> roles -> give permissions
+create user either make group of the permissions add the user to that 
+or 
+run setup_all_permsission from bookings.admin once to add the permissions for the role 
+STAFF_REQUIRED SHOULD BE ACTIVE FOR ALL USERS TO LOGIN
+
+Then you can login as specific users
