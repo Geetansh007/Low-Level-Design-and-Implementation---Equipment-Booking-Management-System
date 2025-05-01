@@ -19,9 +19,9 @@ python manage.py migrate
 python manage.py createsuperuser
 
 # Set permissions (run once)
-python manage.py shell
-from bookings.admin import setup_all_permissions
-setup_all_permissions()
+>>python manage.py shell
+>>from bookings.admin import setup_all_permissions
+>>setup_all_permissions()
 
 or 
 Set user with group and give permission yourself 
