@@ -32,34 +32,34 @@
 ## API Endpoints
 
 ### Authentication
-/api/auth/ - Built-in DRF authentication endpoints
+'/api/auth/ '- Built-in DRF authentication endpoints
 
 ### Users
 | Endpoint | Method | Description | Permissions |
 |----------|--------|-------------|-------------|
-| `/api/users/ | GET | List all users | Admin |
-| `/api/users/| POST | Create user | Admin |
-| `/api/users/{id}/ | GET | User details | Owner/Admin |
-| `/api/users/{id}/| PUT/PATCH | Update user | Owner/Admin |
-| `/api/users/{id}/ | DELETE | Delete user | Admin |
+| `/api/users/' | GET | List all users | Admin |
+| `/api/users/'| POST | Create user | Admin |
+| `/api/users/{id}/' | GET | User details | Owner/Admin |
+| `/api/users/{id}/'| PUT/PATCH | Update user | Owner/Admin |
+| `/api/users/{id}/' | DELETE | Delete user | Admin |
 
 ### Equipment
 | Endpoint | Method | Description | Permissions |
 |----------|--------|-------------|-------------|
-| `/api/equipment/ | GET | List equipment | All |
-| `/api/equipment/ | POST | Create equipment | Admin |
-| `/api/equipment/{id}/ | GET | Equipment details | All |
-| `/api/equipment/{id}/availability/ | GET | Check availability | All |
-| `/api/equipment/available/ | GET | List available equipment | All |
+| `/api/equipment/ '| GET | List equipment | All |
+| `/api/equipment/' | POST | Create equipment | Admin |
+| `/api/equipment/{id}/' | GET | Equipment details | All |
+| `/api/equipment/{id}/availability/' | GET | Check availability | All |
+| `/api/equipment/available/' | GET | List available equipment | All |
 
 ### Bookings
 | Endpoint | Method | Description | Permissions |
 |----------|--------|-------------|-------------|
-| `/api/bookings/ | GET | List bookings | Varies by role |
-| `/api/bookings/ | POST | Create booking | Employee+ |
-| `/api/bookings/{id}/ | GET | Booking details | Owner/Manager/Admin |
-| `/api/bookings/{id}/cancel/ | POST | Cancel booking | Owner/Manager/Admin |
-| `/api/bookings/recurring/ | POST | Create recurring booking | Employee+ |
+| `/api/bookings/' | GET | List bookings | Varies by role |
+| `/api/bookings/' | POST | Create booking | Employee+ |
+| `/api/bookings/{id}/' | GET | Booking details | Owner/Manager/Admin |
+| `/api/bookings/{id}/cancel/' | POST | Cancel booking | Owner/Manager/Admin |
+| `/api/bookings/recurring/' | POST | Create recurring booking | Employee+ |
 
 ### Notifications
 | Endpoint | Method | Description |
@@ -74,7 +74,15 @@
 - PostgreSQL (recommended)
 - Redis (for caching, optional)
 
-### Installation
-1. Clone the repository:
-   git clone https://github.com/yourrepo/equipment-booking.git
-   cd equipment-booking
+Installation
+
+Clone the repo
+Setup requirements 
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver 
+
+go to admin 
+add user -> roles -> give permissions
+
